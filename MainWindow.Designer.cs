@@ -118,6 +118,7 @@
             this.descriptionTextBox.Size = new System.Drawing.Size(274, 256);
             this.descriptionTextBox.TabIndex = 6;
             this.descriptionTextBox.Text = "<Description>";
+            this.descriptionTextBox.Visible = false;
             // 
             // MainWindow
             // 

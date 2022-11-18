@@ -33,15 +33,22 @@ namespace StreakzApp_WindowsForm_prototype
 
         private void editHabitButton_Click(object sender, EventArgs e)
         {
-            HabitModel h = Habit;
-            h.Name = nameTextBox.Text;
-            h.Interval = int.Parse(intervalTextBox.Text);
-            h.Description = descriptionTextBox.Text;
+            if (ValidateForm())
+            {
+                HabitModel h = Habit;
+                h.Name = nameTextBox.Text;
+                h.Interval = int.Parse(intervalTextBox.Text);
+                h.Description = descriptionTextBox.Text;
 
-            GlobalConfig.Connection.UpdateHabit(h);
+                GlobalConfig.Connection.UpdateHabit(h);
 
-            ButtonWasClicked();
-            this.Close();
+                ButtonWasClicked();
+                this.Close(); 
+            }
+            else
+            {
+                MessageBox.Show("Form invalid");
+            }
         }
 
         public delegate void ClickButton();
@@ -52,6 +59,20 @@ namespace StreakzApp_WindowsForm_prototype
             GlobalConfig.Connection.RemoveHabit(Habit);
             ButtonWasClicked();
             this.Close();
+        }
+
+        private bool ValidateForm()
+        {
+            if (nameTextBox.Text.Length < 1)
+            {
+                return false;
+            }
+            if (!int.TryParse(intervalTextBox.Text, out int n) || n < 1)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

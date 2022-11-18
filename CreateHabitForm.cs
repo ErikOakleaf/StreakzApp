@@ -46,10 +46,15 @@ namespace StreakzApp_WindowsForm_prototype
         private bool ValidateForm()
         {
             if (nameTextBox.Text.Length == 0)
+            {
                 return false;
-            if (intervalTextBox.Text.Length == 0)
+            }    
+            if (!int.TryParse(intervalTextBox.Text, out int n) || n < 1)
+            {
                 return false;
+            }
             return true;
         }
+
     }
 }
